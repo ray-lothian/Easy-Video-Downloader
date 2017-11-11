@@ -1,0 +1,110 @@
+{
+    "appDescription": {
+        "description": "",
+        "message": "A download observer that works with external download managers like IDM or FlashGet"
+    },
+    "appTitle": {
+        "description": "",
+        "message": "GetIt Downloader (Video and Audio)"
+    },
+    "name": {
+        "description": "",
+        "message": "GetIt"
+    },
+    "contextIntrrupt": {
+        "description": "",
+        "message": "Interrupt built-in downloader"
+    },
+    "contextVideos": {
+        "description": "",
+        "message": "Track video resources"
+    },
+    "contextAudios": {
+        "description": "",
+        "message": "Track audio resources"
+    },
+    "contextImages": {
+        "description": "",
+        "message": "Track image resources"
+    },
+    "contextLinks": {
+        "description": "",
+        "message": "Download link with GitIt"
+    },
+    "contextMedias": {
+        "description": "",
+        "message": "Download media with GitIt"
+    },
+    "dialogTitle": {
+        "message": "Available downloads for"
+    },
+    "dialogMSG": {
+        "message": "What should I do with these files?"
+    },
+    "dialogDownloadWith": {
+        "message": "Download with"
+    },
+    "dialogCommand": {
+        "message": "Command"
+    },
+    "dialogCopy": {
+        "message": "Copy to Clipboard"
+    },
+    "dialogSize": {
+        "message": "Calculate file sizes"
+    },
+    "dialogOK": {
+        "message": "Download"
+    },
+    "dialogSelectAll": {
+        "message": "Select all"
+    },
+    "dialogSelectNone": {
+        "message": "Select none"
+    },
+    "dialogImages": {
+        "message": "Detected Images:"
+    },
+    "dialogAudios": {
+        "message": "Detected Audios"
+    },
+    "dialogVideos": {
+        "message": "Detected Videos"
+    },
+    "dialogPages": {
+        "message": "Current Pages"
+    },
+    "dialogApplications": {
+        "message": "Requested Links"
+    },
+    "dialogQuotes": {
+        "message": "Use quotations"
+    },
+    "dialogSave": {
+        "message": "Save"
+    },
+    "dialogTest": {
+        "message": "Test"
+    },
+    "dialogBuiltIn": {
+        "message": "Built-in download manager"
+    },
+    "dialogIDM": {
+        "message": "Internet Download Manager"
+    },
+    "dialogFDM": {
+        "message": "Free Download Manager"
+    },
+    "dialogWget": {
+        "message": "GNU Wget"
+    },
+    "dialogWarning": {
+        "message": "Downloading multiple files may affect performance"
+    },
+    "dialogCopied": {
+        "message": "Selected links are copied to the clipboard"
+    },
+    "dialogCopyError": {
+        "message": "Cannot copy to the clipboard!"
+    }
+}
