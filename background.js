@@ -16,13 +16,17 @@ var prefs = {
   image: false,
   video: true,
   audio: true,
-  forbidenKeyword: []
+  forbidenKeyword: [],
+  version: null,
+  faqs: false,
+  badge: true,
+  badgeColor: '#6e6e6e'
 };
-
-chrome.storage.local.get(prefs, ps => {
+document.addEventListener('DOMContentLoaded', () => chrome.storage.local.get(prefs, ps => {
   Object.assign(prefs, ps);
   app.emit('ready', prefs);
-});
+}));
+
 chrome.storage.onChanged.addListener(ps => {
   Object.keys(ps).forEach(k => {
     prefs[k] = ps[k].newValue;
@@ -33,6 +37,7 @@ chrome.storage.onChanged.addListener(ps => {
 app.on('command', ({tab, download = '', responseHeaders = [], instance = false}) => {
   const url = chrome.extension.getURL(
     'data/dialog/index.html?id=' + tab.id +
+    '&windowId=' + tab.windowId +
     '&title=' + encodeURIComponent(tab.title || '') +
     '&referrer=' + encodeURIComponent(tab.url || '') +
     '&url=' + encodeURIComponent(download) +
@@ -83,3 +88,21 @@ app.on('command', ({tab, download = '', responseHeaders = [], instance = false})
     create();
   }
 });
+
+// FAQs & Feedback
+app.on('ready', () => {
+  const version = chrome.runtime.getManifest().version;
+  const pversion = prefs.version;
+  if (prefs.version ? (prefs.faqs && prefs.version !== version) : true) {
+    chrome.storage.local.set({version}, () => {
+      chrome.tabs.create({
+        url: 'http://add0n.com/easy-video-downloader.html?version=' + version +
+          '&type=' + (pversion ? ('upgrade&p=' + pversion) : 'install')
+      });
+    });
+  }
+});
+{
+  const {name, version} = chrome.runtime.getManifest();
+  chrome.runtime.setUninstallURL('http://add0n.com/feedback.html?name=' + name + '&version=' + version);
+}

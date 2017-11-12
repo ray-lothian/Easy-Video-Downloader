@@ -80,7 +80,7 @@
             return;
           }
         }
-        console.log(type, contentType);
+        // console.log(type, contentType);
         if (prefs.enabled && (
           type === 'other' ||
           type === 'main_frame' ||
@@ -142,7 +142,7 @@
       }
       types = types.filter((s, i, l) => l.indexOf(s) === i);
       if (types.length) {
-        console.log(prefs, types);
+        //console.log(prefs, types);
         chrome.webRequest.onHeadersReceived.addListener(onHeadersReceived, {
           urls: ['*://*/*'],
           types

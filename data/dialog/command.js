@@ -2,7 +2,7 @@
 'use strict';
 
 // notify
-var notify = e => chrome.notifications.create(null, {
+var notify = (e = {}) => chrome.notifications.create(null, {
   type: 'basic',
   iconUrl: '/data/icons/48.png',
   title: locale.get('name'),
@@ -21,10 +21,12 @@ utils.inputs = id => [...document.querySelectorAll(`tbody[data-id="${id}"] input
   const copy = document.querySelector('[data-cmd=copy]');
   const test = document.querySelector('[data-cmd=test]');
   const warning = document.getElementById('warning');
+  const command = document.getElementById('command');
   document.addEventListener('change', () => {
     const len = utils.trs().length;
-    test.disabled = copy.disabled = ok.disabled = len === 0;
+    copy.disabled = ok.disabled = len === 0;
     warning.dataset.visible = len > 10;
+    test.disabled = len === 0 || command.value === '';
   });
 }
 // select

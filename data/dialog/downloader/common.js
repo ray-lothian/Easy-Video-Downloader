@@ -64,6 +64,12 @@ downloads.external = () => new Promise((resolve, reject) => chrome.runtime.sendN
   }
 }));
 
-downloads.guide = () => chrome.tabs.create({
-  url: '/data/helper/index.html'
-});
+downloads.guide = () => {
+  const opt = {
+    url: '/data/helper/index.html'
+  };
+  if (args.windowId) {
+    opt.windowId = Number(args.windowId);
+  }
+  chrome.tabs.create(opt);
+};

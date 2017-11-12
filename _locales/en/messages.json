@@ -1,15 +1,15 @@
 {
     "appDescription": {
         "description": "",
-        "message": "A download observer that works with external download managers like IDM or FlashGet"
+        "message": "A video and audio downloader (grabber) that works with both internal and external download managers like IDM or Wget"
     },
     "appTitle": {
         "description": "",
-        "message": "GetIt Downloader (Video and Audio)"
+        "message": "Easy Video Downloader"
     },
     "name": {
         "description": "",
-        "message": "GetIt"
+        "message": "Easy Video Downloader"
     },
     "contextIntrrupt": {
         "description": "",
@@ -106,5 +106,23 @@
     },
     "dialogCopyError": {
         "message": "Cannot copy to the clipboard!"
+    },
+    "optionsTitle": {
+        "message": "Options :: Easy Video Downloader"
+    },
+    "optionsCookies": {
+        "message": "Send cookies to the external download manager"
+    },
+    "optionsBadgeText": {
+        "message": "Display the total number of detected resources in the badge area"
+    },
+    "optionsBadgeColor": {
+        "message": "Badge background color"
+    },
+    "optionsSave": {
+        "message": "Save"
+    },
+    "optionsSaved": {
+        "message": "Options saved."
     }
 }

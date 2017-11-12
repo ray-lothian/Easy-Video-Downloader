@@ -1,4 +1,4 @@
-/* globals app */
+/* globals app, prefs */
 'use strict';
 
 {
@@ -6,11 +6,13 @@
 
   app.on('toolbar', ({tabId, images, videos, audios}) => {
     const count = images + videos + audios;
-    chrome.browserAction.setBadgeText({
-      tabId,
-      text: String(count || '')
-    });
-    console.log('updating badge', tabId, images, videos, audios);
+    if (prefs.badge) {
+      chrome.browserAction.setBadgeText({
+        tabId,
+        text: String(count || '')
+      });
+    }
+    // console.log('updating badge', tabId, images, videos, audios);
     chrome.browserAction.setTitle({
       title: `${name}
 
@@ -28,7 +30,14 @@ audios: ${audios}`
     }
   });
 
-  app.on('ready', prefs => prefs.enabled && icon(true));
+  app.on('ready', prefs => {
+    if (prefs.enabled) {
+      icon(true);
+    }
+    chrome.browserAction.setBadgeBackgroundColor({
+      color: prefs.badgeColor
+    });
+  });
   app.on('prefs.enabled', icon);
 }
 

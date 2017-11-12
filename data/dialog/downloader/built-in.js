@@ -8,9 +8,14 @@ downloads['built-in'].executable = {
   Lin: '',
 };
 downloads['built-in'].download = objs => {
-  const download = obj => new Promise(resolve => chrome.downloads.download({
-    url: obj.url,
-    filename: obj.filename
-  }, resolve));
+  const download = obj => new Promise(resolve => {
+    const opt = {
+      url: obj.url,
+    };
+    if (obj.filename) {
+      opt.filename = obj.filename;
+    }
+    chrome.downloads.download(opt, resolve);
+  });
   return Promise.all(objs.map(download));
 };

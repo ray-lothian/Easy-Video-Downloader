@@ -4,7 +4,7 @@
 downloads.idm = {};
 downloads.idm.executable = {
   Mac: 'open -a "Internet Download Manager" "[HREF]"',
-  Win: '%ProgramFiles(x86)%\\Internet Download Manager\\IDMan.exe /d "[URL]"',
+  Win: '"%ProgramFiles(x86)%\\Internet Download Manager\\IDMan.exe" /d "[HREF]"',
   Lin: 'idm -d "[URL]"',
 };
 
