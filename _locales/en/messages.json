@@ -29,11 +29,11 @@
     },
     "contextLinks": {
         "description": "",
-        "message": "Download link with GitIt"
+        "message": "Download link"
     },
     "contextMedias": {
         "description": "",
-        "message": "Download media with GitIt"
+        "message": "Download media"
     },
     "dialogTitle": {
         "message": "Available downloads for"

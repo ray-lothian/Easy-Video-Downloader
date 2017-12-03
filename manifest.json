@@ -1,6 +1,6 @@
 {
   "manifest_version":2,
-  "version":"0.1.1",
+  "version":"0.1.2",
   "name":"__MSG_appTitle__",
   "description": "__MSG_appDescription__",
 
@@ -48,11 +48,5 @@
   "options_ui": {
     "chrome_style": true,
     "page": "data/options/index.html"
-  },
-  "applications": {
-    "gecko": {
-      "id": "{cd04e15e-6b23-4648-860d-0057602a5c2a}",
-      "strict_min_version": "52.0"
-    }
   }
 }
