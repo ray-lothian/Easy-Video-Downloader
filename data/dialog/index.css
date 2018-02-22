@@ -23,7 +23,6 @@ fieldset td:first-child {
   width: 120px;
 }
 input[type=text] {
-  width: 100%;
   outline: none;
   box-sizing: border-box;
   text-indent: 5px;
@@ -50,6 +49,9 @@ select {
   padding: 10px;
   margin-bottom: 10px;
 }
+#list input[type=text] {
+  width: 100%;
+}
 #list tr:nth-child(even) {
   background-color: #e2e2e2;
 }
@@ -71,8 +73,14 @@ select {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-#list tbody td:nth-of-type(3) {
-  padding-left: 10px;
+#list tbody td[data-id="category"] span {
+  width: 8px;
+  height: 8px;
+  display: block;
+  border-radius: 50%;
+  border: solid 2px #fff;
+  text-align: center;
+  pointer-events: none;
 }
 #warning {
   padding: 5px;

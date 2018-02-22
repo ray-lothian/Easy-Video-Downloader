@@ -95,4 +95,18 @@ ${argv.join('\n')}`);
       }
     })).then(() => target.disabled = false);
   }
+  else if (cmd === 'rename') {
+    const pattern = document.getElementById('pattern').value || 'name-[#].[ext]';
+    [...document.querySelectorAll('input:checked')]
+      .map(i => i.closest('tr').querySelector('input[type=text]'))
+      .forEach((i, index) => {
+        const re = /#=(\d+)/.exec(pattern);
+        const offset = re && re.length ? Number(re[1]) : 1;
+        const n = ('000' + (index + offset)).substr(-3);
+        const ext = i.value.split('.').pop();
+        i.value = pattern
+          .replace('[ext]', ext)
+          .replace(/\[#=*\d*\]/, n);
+      });
+  }
 });

@@ -71,6 +71,11 @@ app.on('ready', prefs => {
     checked: prefs.image
   });
   chrome.contextMenus.create({
+    id: 'clear-list',
+    contexts: ['browser_action'],
+    title: chrome.i18n.getMessage('contextClear')
+  });
+  chrome.contextMenus.create({
     id: 'download-link',
     contexts: ['link'],
     title: chrome.i18n.getMessage('contextLinks')

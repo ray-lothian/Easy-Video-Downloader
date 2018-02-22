@@ -1,7 +1,7 @@
 {
     "appDescription": {
         "description": "",
-        "message": "A video and audio downloader (grabber) that works with both internal and external download managers like IDM or Wget"
+        "message": "A video downloader that works with both internal and external download managers"
     },
     "appTitle": {
         "description": "",
@@ -35,6 +35,10 @@
         "description": "",
         "message": "Download media"
     },
+    "contextClear": {
+        "description": "",
+        "message": "Clear list for this tab"
+    },
     "dialogTitle": {
         "message": "Available downloads for"
     },
@@ -49,6 +53,9 @@
     },
     "dialogCopy": {
         "message": "Copy to Clipboard"
+    },
+    "dialogRename": {
+        "message": "Rename"
     },
     "dialogSize": {
         "message": "Calculate file sizes"

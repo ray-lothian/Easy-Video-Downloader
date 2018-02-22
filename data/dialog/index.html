@@ -16,6 +16,7 @@
         <colgroup>
           <col width="20">
           <col width="30%">
+          <col width="20">
           <col width="80px">
           <col>
         </colgroup>
@@ -73,6 +74,7 @@
           <tr>
             <td><input type="checkbox"></td>
             <td><input type="text" data-id="name" placeholder="filename"></td>
+            <td data-id="category" data-cmd="category"><span></span></td>
             <td data-id="size">--</td>
             <td data-id="url">URL</td>
           </tr>
@@ -108,7 +110,10 @@
     </fieldset>
     <div vbox>
       <span id="warning" data-visible=false data-l10n-id="dialogWarning"></span>
-      <div hbox pack=end id="tools" align="center">
+      <div hbox id="tools" align="center">
+        <input type="text" id="pattern" value="name-[#=1].[ext]">
+        <input type="button" data-l10n-value="value" data-l10n-id="dialogRename" data-cmd="rename">
+        <span flex=1></span>
         <input type="button" data-l10n-value="value" data-l10n-id="dialogSize" data-cmd="size">
         <input type="button" data-l10n-value="value" data-l10n-id="dialogCopy" disabled="true" data-cmd="copy">
         <input type="button" data-l10n-value="value" data-l10n-id="dialogTest" data-cmd="test" disabled="true">

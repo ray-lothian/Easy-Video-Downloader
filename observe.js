@@ -122,6 +122,14 @@
     });
   }
 
+  chrome.contextMenus.onClicked.addListener((info, tab) => {
+    if (info.menuItemId === 'clear-list') {
+      onCommitted({
+        tabId: tab.id
+      });
+    }
+  });
+
   const observe = {
     install: () => {
       observe.remove();
