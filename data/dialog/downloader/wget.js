@@ -5,7 +5,7 @@ downloads.wget = {};
 downloads.wget.executable = {
   Mac: `/usr/bin/osascript -e 'tell application "Terminal" to activate' -e 'tell application "Terminal" to do script "cd ~/Desktop && wget --user-agent=\\"[USERAGENT]\\" --referer=\\"[REFERRER]\\" --continue --load-cookies=[COOKIES] \\"[HREF]\\""'`,
   Win: `cmd.exe /C 'start cmd.exe "/S /K ""%ProgramFiles(x86)%\\GnuWin32\\bin\\wget.exe" --user-agent="[USERAGENT]" --referer="[REFERRER]" --no-check-certificate --continue --load-cookies=[COOKIES] "[HREF]"""'`,
-  Lin: `xterm -hold -e 'wget --user-agent="[USERAGENT]" --referer="[REFERRER]" --no-check-certificate --continue --load-cookies=[COOKIES] "[HREF]"'`,
+  Lin: `xterm -hold -e 'wget --user-agent="[USERAGENT]" --referer="[REFERRER]" --no-check-certificate --continue --load-cookies=[COOKIES] "[HREF]"'`
 };
 
 downloads.wget.download = (dOBJs, str, quotes = false) => downloads.external().then(() => {

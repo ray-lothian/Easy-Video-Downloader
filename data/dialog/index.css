@@ -2,10 +2,10 @@ html {
   height: 100%;
 }
 body {
-  font-family: "Helvetica Neue",Helvetica,sans-serif;
+  font-family: "Helvetica Neue", Helvetica, sans-serif;
   font-size: 13px;
   height: calc(100% - 20px);
-  margin: 10px;
+  margin: 0 10px 10px 10px;
   background-color: #ececec;
 }
 select {
@@ -16,7 +16,8 @@ table {
   width: 100%;
   border-collapse: collapse;
   table-layout: fixed;
-}fieldset tr {
+}
+fieldset tr {
   height: 32px;
 }
 fieldset td:first-child {
@@ -30,18 +31,30 @@ input[type=text] {
 fieldset {
   background-color: #e2e2e2;
   margin: 10px 0;
-  border: solid 1px #d3d3d3;
+  border: none;
 }
 a {
   text-decoration: none;
   margin-left: 5px;
 }
 input[type=button] {
-  margin-left: 5px;
+  margin: 0 1px;
+  font-size: 11px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+input[type=button]:active {
+  opacity: 0.5;
+}
+select,
+input[type=text] {
+  border: none;
+  border-radius: 0;
 }
 input,
 select {
-  height: 22px;
+  height: 26px;
 }
 #list {
   overflow: auto;
@@ -98,6 +111,37 @@ body[data-videos=false] [data-id=videos],
 body[data-audios=false] [data-id=audios],
 body[data-applications=false] [data-id=applications] {
   display: none;
+}
+
+#notify {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  background-color: #fcf8e3;
+  border: solid 1px #faebcc;
+  color: #8d6d3b;
+  padding: 8px;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#notify:empty {
+  display: none;
+}
+#remote {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  font-size: 11px;
+}
+#remote span {
+  color: #000;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 8px;
+  background-color: #e2e2e2;
+  margin-right: 2px;
+  cursor: pointer;
 }
 
 [hbox] {

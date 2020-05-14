@@ -1,6 +1,8 @@
 /* globals locale */
 'use strict';
 
+const toast = document.getElementById('toast');
+
 chrome.storage.local.get({
   cookies: false,
   badge: true,
@@ -17,9 +19,8 @@ document.getElementById('save').addEventListener('click', () => {
     badge: document.getElementById('badge').checked,
     badgeColor: document.getElementById('badgeColor').value
   }, () => {
-    const info = document.getElementById('info');
-    info.textContent = locale.get('optionsSaved');
-    window.setTimeout(() => info.textContent = '', 750);
+    toast.textContent = locale.get('optionsSaved');
+    window.setTimeout(() => toast.textContent = '', 750);
   });
 
   chrome.browserAction.setBadgeBackgroundColor({
@@ -34,3 +35,22 @@ document.getElementById('save').addEventListener('click', () => {
     })));
   }
 });
+
+// reset
+document.getElementById('reset').addEventListener('click', e => {
+  if (e.detail === 1) {
+    toast.textContent = 'Double-click to reset!';
+    window.setTimeout(() => toast.textContent = '', 750);
+  }
+  else {
+    localStorage.clear();
+    chrome.storage.local.clear(() => {
+      chrome.runtime.reload();
+      window.close();
+    });
+  }
+});
+// support
+document.getElementById('support').addEventListener('click', () => chrome.tabs.create({
+  url: chrome.runtime.getManifest().homepage_url + '?rd=donate'
+}));

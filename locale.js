@@ -1,6 +1,6 @@
 'use strict';
 
-var locale = {
+const locale = {
   get: chrome.i18n.getMessage
 };
 

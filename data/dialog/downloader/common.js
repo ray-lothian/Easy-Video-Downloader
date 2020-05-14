@@ -1,7 +1,7 @@
 /* globals Parser, args */
 'use strict';
 
-var downloads = {
+const downloads = {
   id: 'com.add0n.node'
 };
 
@@ -9,16 +9,15 @@ downloads.cookies = (url = args.referrer) => {
   if (!url || !chrome.cookies) {
     return Promise.resolve('');
   }
-  return new Promise(resolve => {
-    chrome.storage.local.get({
-      cookies: false
-    }, prefs => prefs.cookies ? chrome.cookies.getAll({
-      url
-    }, arr => resolve(arr.map(o => o.name + '=' + o.value).join('; '))) : resolve(''));
-  });
+  return new Promise(resolve => chrome.storage.local.get({
+    cookies: false
+  }, prefs => prefs.cookies ? chrome.cookies.getAll({
+    url
+  }, arr => resolve(arr.map(o => o.name + '=' + o.value).join('; '))) : resolve('')));
 };
 
-downloads.parse = (str, {url, filename = ' '}, quotes = false) => {
+downloads.parse = (str, {url, filename}, quotes = false) => {
+  filename = filename || ' ';
   url = new URL(url);
   const termref = {
     lineBuffer: str.replace(/\[HREF\]/g, url.href)
@@ -60,7 +59,7 @@ downloads.external = () => new Promise((resolve, reject) => chrome.runtime.sendN
     resolve();
   }
   else {
-    reject('Native client is not present. Cannot communicate with operating system.');
+    reject(Error('Native client is not present. Cannot communicate with operating system.'));
   }
 }));
 

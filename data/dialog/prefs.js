@@ -7,7 +7,7 @@
     'idm': '',
     'fdm': '',
     'wget': '',
-    quotes: false
+    'quotes': false
   };
   const quotes = document.getElementById('quotes');
 
@@ -20,7 +20,6 @@
   const downloader = document.getElementById('downloader');
   downloader.addEventListener('change', ({target}) => {
     const os = navigator.platform.substr(0, 3);
-    console.log(target.value);
     command.value = prefs[target.value] || downloads[target.value].executable[os];
     command.dispatchEvent(new Event('input', {
       bubbles: true

@@ -2,14 +2,17 @@
 'use strict';
 
 // notify
-var notify = (e = {}) => chrome.notifications.create(null, {
-  type: 'basic',
-  iconUrl: '/data/icons/48.png',
-  title: locale.get('name'),
-  message: e.message || e,
-});
+const notify = e => {
+  const msg = e.message || e;
+  if (msg) {
+    const n = document.getElementById('notify');
+    window.clearTimeout(notify.id);
+    n.textContent = msg;
+    notify.id = window.setTimeout(() => n.textContent = '', 4000);
+  }
+};
 
-var utils = {};
+const utils = {};
 utils.trs = (selected = true) => [
   ...document.querySelectorAll('#list input[type=checkbox]' + (selected ? ':checked' : ''))
 ].map(i => i.closest('tr'));
@@ -64,25 +67,52 @@ ${argv.join('\n')}`);
     const quotes = document.getElementById('quotes');
     const command = document.getElementById('command');
     downloads.disable();
-    downloads[downloader.value].download(objs, command.value, quotes.checked).then(downloads.enable).catch(e => {
-      notify(e);
-      console.error(e);
-      downloads.guide();
-      downloads.enable();
-    });
+
+    const next = () => downloads[downloader.value]
+      .download(objs, command.value, quotes.checked)
+      .then(downloads.enable).catch(e => {
+        notify(e);
+        console.error(e);
+        downloads.guide();
+        downloads.enable();
+      });
+
+    const permissions = [];
+    if (downloader.value === 'idm' || downloader.value === 'wget') {
+      permissions.push('nativeMessaging');
+    }
+    if (downloader.value === 'wget') {
+      permissions.push('cookies');
+    }
+    if (permissions.length) {
+      chrome.permissions.request({
+        permissions
+      }, granted => {
+        if (granted) {
+          if (chrome.runtime.sendNativeMessage) {
+            next();
+          }
+          else if (confirm('Restart is needed. Proceed?')) {
+            location.reload();
+          }
+        }
+        else {
+          downloader.value = 'built-in';
+          downloader.dispatchEvent(new Event('change'));
+          downloads.enable();
+          notify('Try with the built-in download manager');
+        }
+      });
+    }
+    else {
+      next();
+    }
   }
   else if (cmd === 'copy') {
     const links = utils.trs().map(tr => tr.querySelector('[data-id=url]').textContent).join('\n');
-    document.addEventListener('copy', function(e) {
-      e.clipboardData.setData('text/plain', links);
-      e.preventDefault();
-    });
-    if (document.execCommand('copy')) {
+    navigator.clipboard.writeText(links).then(() => {
       notify(locale.get('dialogCopied'));
-    }
-    else {
-      notify(locale.get('dialogCopyError'));
-    }
+    }).catch(e => notify(e.message));
   }
   else if (cmd === 'size') {
     target.disabled = true;
@@ -91,7 +121,9 @@ ${argv.join('\n')}`);
       if (size.textContent === '--') {
         size.textContent = '...';
         const link = tr.querySelector('[data-id=url]');
-        return filesize.calculate(link.textContent).then(s => size.textContent = s);
+        return filesize.calculate(link.textContent).then(s => {
+          size.textContent = s;
+        });
       }
     })).then(() => target.disabled = false);
   }
@@ -108,5 +140,14 @@ ${argv.join('\n')}`);
           .replace('[ext]', ext)
           .replace(/\[#=*\d*\]/, n);
       });
+  }
+});
+
+document.getElementById('remote').addEventListener('click', e => {
+  const id = e.target.dataset.id;
+  if (id) {
+    chrome.tabs.create({
+      url: `https://webbrowsertools.com/${id}/`
+    });
   }
 });

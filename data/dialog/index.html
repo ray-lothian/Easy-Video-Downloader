@@ -11,13 +11,22 @@
     data-audios=false
     data-videos=false
     data-applications=false>
+    <div id="remote">
+      <span data-id="convert-to-mp3" title="Convert to MP3">Convert to MP3</span>
+      <span data-id="video-audio-muxer" title="Media Muxer">Media Muxer</span>
+      <span data-id="audio-joiner" title="Audio Joiner">Audio Joiner</span>
+      <span data-id="image-resizer" title="Image Resizer">Image Resizer</span>
+      <span data-id="pdf-reader" title="PDF Reader">PDF Reader</span>
+      <span data-id="zip-manager" title="ZIP Manager">ZIP Manager</span>
+      <span data-id="sqlite-reader" title="SQLite Reader">SQLite Reader</span>
+    </div>
     <div id="list" flex="1">
       <table>
         <colgroup>
           <col width="20">
           <col width="30%">
           <col width="20">
-          <col width="80px">
+          <col width="140px">
           <col>
         </colgroup>
         <thead data-id="audios">
@@ -91,6 +100,7 @@
               <option value="built-in" data-l10n-id="dialogBuiltIn"></option>
               <option value="idm" data-l10n-id="dialogIDM"></option>
               <option value="wget" data-l10n-id="dialogWget"></option>
+              <option value="tdm" data-l10n-id="dialogTDM"></option>
             </select>
           </td>
         </tr>
@@ -99,9 +109,11 @@
           <td>
             <div hbox align="center">
               <input type="text" flex="1" id=command>
+              &nbsp;
               <label hbox align="center">
                 <input type="checkbox" id="quotes"><span data-l10n-id="dialogQuotes"></span>
               </label>
+              &nbsp;
               <input type="button" data-l10n-value="value" data-l10n-id="dialogSave" disabled="true" data-cmd="save">
             </div>
           </td>
@@ -120,6 +132,8 @@
         <input type="button" data-l10n-value="value" data-l10n-id="dialogOK" disabled="true" data-cmd="download">
       </div>
     </div>
+
+    <div id="notify"></div>
     <script src="/locale.js"></script>
     <script src="command.js"></script>
     <script src="filename.js"></script>
@@ -128,6 +142,7 @@
     <script src="downloader/common.js"></script>
     <script src="downloader/built-in.js"></script>
     <script src="downloader/idm.js"></script>
+    <script src="downloader/tdm.js"></script>
     <script src="downloader/wget.js"></script>
     <script src="prefs.js"></script>
     <script src="persist.js"></script>

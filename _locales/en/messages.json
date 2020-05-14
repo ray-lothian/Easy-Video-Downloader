@@ -58,7 +58,7 @@
         "message": "Rename"
     },
     "dialogSize": {
-        "message": "Calculate file sizes"
+        "message": "Calculate File Sizes"
     },
     "dialogOK": {
         "message": "Download"
@@ -101,6 +101,9 @@
     },
     "dialogFDM": {
         "message": "Free Download Manager"
+    },
+    "dialogTDM": {
+        "message": "Turbo Download Manager"
     },
     "dialogWget": {
         "message": "GNU Wget"

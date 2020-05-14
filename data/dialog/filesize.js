@@ -1,6 +1,6 @@
 'use strict';
 
-var filesize = {};
+const filesize = {};
 {
   function humanFileSize(bytes, si) {
     bytes = Number(bytes);
@@ -27,14 +27,18 @@ var filesize = {};
 
 filesize.calculate = link => new Promise(resolve => {
   const req = new XMLHttpRequest();
-  req.open('HEAD', link);
-  req.onload = () => {
-    const s = req.getResponseHeader('Content-Length');
-    resolve(s && s !== '0' ? filesize.guess({
-      responseHeaders: [{
-        'Content-Length': s
-      }]
-    }) : '--');
+  req.open('GET', link);
+  req.onreadystatechange = () => {
+    if (req.readyState === XMLHttpRequest.HEADERS_RECEIVED) {
+      const s = req.getResponseHeader('Content-Length');
+      resolve(s && s !== '0' ? filesize.guess({
+        responseHeaders: [{
+          name: 'Content-Length',
+          value: s
+        }]
+      }) : '--');
+      req.abort();
+    }
   };
   req.onerror = () => resolve('--');
   req.send();

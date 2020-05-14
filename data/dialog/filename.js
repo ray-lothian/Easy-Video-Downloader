@@ -1,6 +1,6 @@
 'use strict';
 
-var filename = {};
+const filename = {};
 filename.guess = d => {
   let url = d.url;
   const disposition = (d.responseHeaders || [])
@@ -30,11 +30,11 @@ filename.guess = d => {
     name = name.replace(se[0], '');
   }
   // removing exceptions
-  name = name.replace(/[\\/:*?"<>|"]/g, '-');
-  // removing trimming white spaces
-  name = name.trim();
+  name = name.trim().replace(/[\\/:*?"<>|]/g, '-').substring(0, 240);
+  name = name || 'unknown';
+
   if (se && se.length) {
     return name + se[0];
   }
-  return '';
+  return name;
 };

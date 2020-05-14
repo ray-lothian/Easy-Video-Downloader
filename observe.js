@@ -1,9 +1,15 @@
 /* globals app, prefs */
 'use strict';
 {
-  const os = navigator.userAgent.indexOf('Firefox') !== -1 ? 'firefox' : (
-    navigator.userAgent.indexOf('OPR') === -1 ? 'chrome' : 'opera'
-  );
+  const os = (() => {
+    if (navigator.userAgent.indexOf('Firefox') !== -1) {
+      return 'firefox';
+    }
+    else if (navigator.userAgent.indexOf('OPR') !== -1) {
+      return 'opera';
+    }
+    return 'chrome';
+  })();
 
   const cache = {
     image: {},
@@ -26,15 +32,25 @@
       return;
     }
     const tabId = d.tabId;
-    cache[type][tabId] = cache[type][tabId] || {};
+    cache[type][tabId] = cache[type][tabId] || new Map();
     const emit = !(d.url in cache[type][tabId]);
-    cache[type][tabId][d.url] = d;
+    d.timestamp = Date.now();
+    cache[type][tabId].set(d.url, d);
+
+    if (cache[type][tabId].size > 100) {
+      const iterator = cache[type][tabId].keys();
+      while (cache[type][tabId].size > 100) {
+        const key = iterator.next().value;
+        cache[type][tabId].delete(key);
+      }
+    }
+
     if (emit) {
       app.emit('toolbar', {
         tabId,
-        images: prefs.image ? Object.keys(cache.image[tabId] || {}).length : 0,
-        videos: prefs.video ? Object.keys(cache.video[tabId] || {}).length : 0,
-        audios: prefs.audio ? Object.keys(cache.audio[tabId] || {}).length : 0
+        images: prefs.image && cache.image[tabId] ? cache.image[tabId].size : 0,
+        videos: prefs.video && cache.video[tabId] ? cache.video[tabId].size : 0,
+        audios: prefs.audio && cache.audio[tabId] ? cache.audio[tabId].size : 0
       });
     }
   }
@@ -56,7 +72,7 @@
       const contentType = responseHeaders
         .filter(o => o.name === 'content-type' || o.name === 'Content-Type')
         .map(o => o.value).shift();
-      //console.log(type, contentType, d)
+      // console.log(type, contentType, d)
       if (contentType) {
         if (
           contentType.startsWith('text/') ||
@@ -104,10 +120,18 @@
   chrome.runtime.onMessage.addListener((request, sender, response) => {
     if (request.method === 'requests') {
       const tabId = request.tabId;
+
+      const videos = cache.video[tabId] ? Array.from(cache.video[tabId].entries())
+        .reduce((main, [key, value]) => ({...main, [key]: value}), {}) : {};
+      const audios = cache.audio[tabId] ? Array.from(cache.audio[tabId].entries())
+        .reduce((main, [key, value]) => ({...main, [key]: value}), {}) : {};
+      const images = cache.image[tabId] ? Array.from(cache.image[tabId].entries())
+        .reduce((main, [key, value]) => ({...main, [key]: value}), {}) : {};
+
       response({
-        videos: cache.video[tabId],
-        audios: cache.audio[tabId],
-        images: cache.image[tabId]
+        videos,
+        audios,
+        images
       });
     }
   });
@@ -148,9 +172,12 @@
       if (prefs.video || prefs.audio) {
         types.push('media', 'xmlhttprequest', 'other');
       }
-      types = types.filter((s, i, l) => l.indexOf(s) === i);
+
+      types = types.filter((s, i, l) => {
+        return l.indexOf(s) === i;
+      });
       if (types.length) {
-        //console.log(prefs, types);
+        // console.log(prefs, types);
         chrome.webRequest.onHeadersReceived.addListener(onHeadersReceived, {
           urls: ['*://*/*'],
           types

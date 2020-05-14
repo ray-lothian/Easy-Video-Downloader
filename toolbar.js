@@ -21,10 +21,13 @@ videos: ${videos}
 audios: ${audios}`
     });
   });
+
   const icon = enabled => chrome.browserAction.setIcon({
     path: {
       '16': 'data/icons/' + (enabled ? '' : 'disabled/') + '16.png',
+      '19': 'data/icons/' + (enabled ? '' : 'disabled/') + '19.png',
       '32': 'data/icons/' + (enabled ? '' : 'disabled/') + '32.png',
+      '38': 'data/icons/' + (enabled ? '' : 'disabled/') + '38.png',
       '48': 'data/icons/' + (enabled ? '' : 'disabled/') + '48.png',
       '64': 'data/icons/' + (enabled ? '' : 'disabled/') + '64.png'
     }
@@ -82,7 +85,7 @@ app.on('ready', prefs => {
   });
   chrome.contextMenus.create({
     id: 'download-media',
-    contexts: ['video', 'image'],
+    contexts: ['audio', 'video', 'image'],
     title: chrome.i18n.getMessage('contextMedias')
   });
 });

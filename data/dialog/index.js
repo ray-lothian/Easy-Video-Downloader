@@ -1,14 +1,14 @@
 /* globals locale, filename, filesize */
 'use strict';
 
-var args = window.location.search.substr(1).split('&').reduce((p, c) => {
+const args = window.location.search.substr(1).split('&').reduce((p, c) => {
   const [key, value] = c.split('=');
   p[key] = decodeURIComponent(value);
   return p;
 }, {});
 document.title = locale.get('dialogTitle') + ' "' + (args.title || '-') + '"';
 
-var category = (() => {
+const category = (() => {
   let index = -1;
   const codes = ['#00008B', '#006400', '#696969', '#800080', '#800000', '#2F4F4F', '#4B0082', '#8B4513', '#191970'];
   const names = {};
@@ -21,7 +21,7 @@ var category = (() => {
   };
 })();
 
-var add = (t => (d, key) => {
+const add = (t => (d, key) => {
   document.body.dataset[key] = true;
   const tbody = document.querySelector(`#list tbody[data-id="${key}"]`);
   const clone = document.importNode(t.content, true);
@@ -49,13 +49,13 @@ else {
     tabId: args.id
   }, response => {
     ['images', 'audios', 'videos', 'applications']
-    .filter(key => response[key])
-    .forEach(key => {
-      Object.keys(response[key]).forEach(name => {
-        const d = response[key][name];
-        add(d, key);
+      .filter(key => response[key])
+      .forEach(key => {
+        Object.keys(response[key]).forEach(name => {
+          const d = response[key][name];
+          add(d, key);
+        });
       });
-    });
     document.dispatchEvent(new Event('change'));
   });
 }
@@ -86,6 +86,7 @@ if (args.referrer) {
       [...document.querySelectorAll(`[data-category="${category}"]`)]
         .map(s => s.closest('tr').querySelector('input'))
         .forEach(i => i.checked = true);
+      document.dispatchEvent(new Event('change'));
     }
   });
 }

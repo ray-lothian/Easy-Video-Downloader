@@ -5,7 +5,7 @@ downloads.idm = {};
 downloads.idm.executable = {
   Mac: 'open -a "Internet Download Manager" "[HREF]"',
   Win: '"%ProgramFiles(x86)%\\Internet Download Manager\\IDMan.exe" /d "[HREF]"',
-  Lin: 'idm -d "[URL]"',
+  Lin: 'idm -d "[URL]"'
 };
 
 downloads.idm.download = (dOBJs, str, quotes = false) => downloads.external().then(() => {
@@ -20,8 +20,6 @@ downloads.idm.download = (dOBJs, str, quotes = false) => downloads.external().th
     str = str.replace(/\s[^\s]*\[COOKIES\][^\s]*\s/, ' ');
     return new Promise((resolve, reject) => {
       const [executable, ...argv] = downloads.parse(str, d, quotes);
-      console.log('Executable', executable);
-      console.log('Arguments', argv);
       chrome.runtime.sendNativeMessage(downloads.id, {
         permissions: ['child_process'],
         args: [executable, ...argv],
