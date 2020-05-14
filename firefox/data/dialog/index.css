@@ -43,6 +43,7 @@ input[type=button] {
   border: none;
   outline: none;
   cursor: pointer;
+  background-color: #fff;
 }
 input[type=button]:active {
   opacity: 0.5;

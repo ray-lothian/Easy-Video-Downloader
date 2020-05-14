@@ -55,8 +55,8 @@ app.on('command', ({tab, download = '', responseHeaders = [], instance = false})
       url,
       width: prefs.width,
       height: prefs.height,
-      left: prefs.left,
-      top: prefs.top,
+      left: Math.max(0, prefs.left),
+      top: Math.max(prefs.top, 0),
       type: 'popup'
     }, w => {
       if (instance === false) {

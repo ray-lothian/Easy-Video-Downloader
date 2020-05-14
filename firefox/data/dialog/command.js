@@ -79,7 +79,9 @@ ${argv.join('\n')}`);
 
     const permissions = [];
     if (downloader.value === 'idm' || downloader.value === 'wget') {
-      permissions.push('nativeMessaging');
+      if (chrome.runtime.getManifest()['optional_permissions'].indexOf('nativeMessaging') !== -1) {
+        permissions.push('nativeMessaging');
+      }
     }
     if (downloader.value === 'wget') {
       permissions.push('cookies');
