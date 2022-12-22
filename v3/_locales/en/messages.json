@@ -1,0 +1,138 @@
+{
+    "appDescription": {
+        "description": "",
+        "message": "A video downloader that works with both internal and external download managers"
+    },
+    "appTitle": {
+        "description": "",
+        "message": "Easy Video Downloader"
+    },
+    "name": {
+        "description": "",
+        "message": "Easy Video Downloader"
+    },
+    "contextIntrrupt": {
+        "description": "",
+        "message": "Interrupt built-in downloader"
+    },
+    "contextVideos": {
+        "description": "",
+        "message": "Track video resources"
+    },
+    "contextAudios": {
+        "description": "",
+        "message": "Track audio resources"
+    },
+    "contextImages": {
+        "description": "",
+        "message": "Track image resources"
+    },
+    "contextLinks": {
+        "description": "",
+        "message": "Download link"
+    },
+    "contextMedias": {
+        "description": "",
+        "message": "Download media"
+    },
+    "contextClear": {
+        "description": "",
+        "message": "Clear list for this tab"
+    },
+    "dialogTitle": {
+        "message": "Available downloads for"
+    },
+    "dialogMSG": {
+        "message": "What should I do with these files?"
+    },
+    "dialogDownloadWith": {
+        "message": "Download with"
+    },
+    "dialogCommand": {
+        "message": "Command"
+    },
+    "dialogCopy": {
+        "message": "Copy to Clipboard"
+    },
+    "dialogRename": {
+        "message": "Rename"
+    },
+    "dialogSize": {
+        "message": "Calculate File Sizes"
+    },
+    "dialogOK": {
+        "message": "Download"
+    },
+    "dialogSelectAll": {
+        "message": "Select all"
+    },
+    "dialogSelectNone": {
+        "message": "Select none"
+    },
+    "dialogImages": {
+        "message": "Detected Images:"
+    },
+    "dialogAudios": {
+        "message": "Detected Audios"
+    },
+    "dialogVideos": {
+        "message": "Detected Videos"
+    },
+    "dialogPages": {
+        "message": "Current Pages"
+    },
+    "dialogApplications": {
+        "message": "Requested Links"
+    },
+    "dialogQuotes": {
+        "message": "Use quotations"
+    },
+    "dialogSave": {
+        "message": "Save"
+    },
+    "dialogTest": {
+        "message": "Test"
+    },
+    "dialogBuiltIn": {
+        "message": "Built-in download manager"
+    },
+    "dialogIDM": {
+        "message": "Internet Download Manager"
+    },
+    "dialogFDM": {
+        "message": "Free Download Manager"
+    },
+    "dialogTDM": {
+        "message": "Turbo Download Manager"
+    },
+    "dialogWget": {
+        "message": "GNU Wget"
+    },
+    "dialogWarning": {
+        "message": "Downloading multiple files may affect performance"
+    },
+    "dialogCopied": {
+        "message": "Selected links are copied to the clipboard"
+    },
+    "dialogCopyError": {
+        "message": "Cannot copy to the clipboard!"
+    },
+    "optionsTitle": {
+        "message": "Options :: Easy Video Downloader"
+    },
+    "optionsCookies": {
+        "message": "Send cookies to the external download manager"
+    },
+    "optionsBadgeText": {
+        "message": "Display the total number of detected resources in the badge area"
+    },
+    "optionsBadgeColor": {
+        "message": "Badge background color"
+    },
+    "optionsSave": {
+        "message": "Save Options"
+    },
+    "optionsSaved": {
+        "message": "Options saved."
+    }
+}

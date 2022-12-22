@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title data-l10n-id="optionsTitle"></title>
+  <link rel="stylesheet" type="text/css" href="index.css">
+</head>
+<body>
+  <div class="list">
+    <input type="checkbox" id="cookies">
+    <label for=cookies data-l10n-id="optionsCookies"></label>
+    <span></span>
+    <input type="checkbox" id="badge">
+    <label for=cookies data-l10n-id="optionsBadgeText"></label>
+    <span></span>
+    <span></span>
+    <label for="badgeColor" data-l10n-id="optionsBadgeColor"></label>
+    <input type="color" id="badgeColor">
+  </div>
+
+  <p>
+    <input type="button" id="reset" value="Reset Preferences">
+    <input type="button" id="support" value="Support Development">
+  </p>
+  <p>
+    <input type="button" data-l10n-id="optionsSave" data-l10n-value="value" id="save">
+    <span id="toast"></span>
+  </p>
+  <script src="/data/locale.js"></script>
+  <script src="index.js"></script>
+</body>
+</html>

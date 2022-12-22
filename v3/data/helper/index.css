@@ -1,0 +1,74 @@
+body {
+  font-size: 14px;
+  line-height: 1.5;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif;
+  background-color: #fff;
+  color: #2b3a55;
+  width: min(100% - 2rem, 70rem);
+  margin-inline: auto;
+}
+a,
+a:visited {
+  color: #07c;
+}
+h1 {
+  color: #F2E5E5;
+  background-color: #2B3A55;
+  padding: 30px 10px;
+  margin: 0;
+  font-size: 24px;
+  font-weight: normal;
+  text-align: center;
+}
+p {
+  padding: 10px;
+  margin: 0 0 10px 0;
+}
+
+input[type=button] {
+  color: #444;
+  background-image: linear-gradient(rgb(237, 237, 237), rgb(237, 237, 237) 38%, rgb(222, 222, 222));
+  box-shadow: rgba(0, 0, 0, 0.08) 0 1px 0, rgba(255, 255, 255, 0.75) 0 1px 2px inset;
+  text-shadow: rgb(240, 240, 240) 0 1px 0;
+  border: solid 1px rgba(0, 0, 0, 0.25);
+  padding: 10px;
+  cursor: pointer;
+}
+
+.note {
+  color: #2b3a55;
+  background-color: #f2e5e5;
+}
+.flex {
+  display: flex;
+  height: 100px;
+  align-items: center;
+  justify-content: center;
+}
+body[data-os=windows] .linux {
+  display: none;
+}
+body[data-os=linux] .windows {
+  display: none;
+}
+body[data-step="1"] .step1 {
+  text-decoration: line-through;
+  opacity: 0.5;
+}
+.guide {
+  padding-left: 10px;
+}
+.guide ul {
+  margin: 5px;
+}
+body[data-installed=true] #steps > li {
+  text-decoration: line-through;
+  opacity: 0.5;
+}
+body[data-installed=true] #alternative {
+  font-weight: bold;
+  color: red;
+}
+body[data-installed=true] .canhide {
+  opacity: 0.5;
+}

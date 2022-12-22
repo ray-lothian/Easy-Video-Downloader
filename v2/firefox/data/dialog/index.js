@@ -8,6 +8,10 @@ const args = window.location.search.substr(1).split('&').reduce((p, c) => {
 }, {});
 document.title = locale.get('dialogTitle') + ' "' + (args.title || '-') + '"';
 
+if (/Edg/.test(navigator.userAgent)) {
+  document.getElementById('remote').style.display = 'none';
+}
+
 const category = (() => {
   let index = -1;
   const codes = ['#00008B', '#006400', '#696969', '#800080', '#800000', '#2F4F4F', '#4B0082', '#8B4513', '#191970'];
