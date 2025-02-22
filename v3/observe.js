@@ -1,11 +1,11 @@
-/* global app */
-
 {
-  const push = (type, d) => chrome.storage.local.get({
-    image: false,
-    video: true,
-    audio: true
-  }, async prefs => {
+  const push = async (type, d) => {
+    const prefs = await chrome.storage.local.get({
+      image: false,
+      video: true,
+      audio: true
+    });
+
     if (prefs[type] === false) {
       return;
     }
@@ -49,7 +49,7 @@
       const [{result}] = r;
 
       if (result.exists === false) {
-        app.emit('toolbar', {
+        toolbar.run({
           tabId,
           images: Object.keys(result?.image || {}).length,
           videos: Object.keys(result?.video || {}).length,
@@ -57,7 +57,7 @@
         });
       }
     }
-  });
+  };
 
   const onHeadersReceived = d => {
     const {type, responseHeaders, tabId} = d;
@@ -70,36 +70,44 @@
     }
     else {
       // prevent YouTube video link detection!
-      if (d.url.indexOf('googlevideo.') !== -1) {
+      if (d.url.includes('googlevideo.')) {
         return;
       }
 
       const contentType = responseHeaders
         .filter(o => o.name === 'content-type' || o.name === 'Content-Type')
-        .map(o => o.value).shift();
+        .map(o => o.value).shift() || '';
       // console.log(type, contentType, d)
-      if (contentType) {
-        if (
-          contentType.startsWith('text/') ||
-          contentType.startsWith('application/json')
-        ) {
+      if (
+        contentType.startsWith('text/') ||
+        contentType.startsWith('application/json')
+      ) {
+        return;
+      }
+
+      if (
+        contentType.startsWith('image/') ||
+        ['.jpg', '.jpeg', '.png', '.gif', '.bmp', '.tiff', '.webp', '.svg'].some(a => d.url.includes(a))
+      ) {
+        push('image', d);
+      }
+      if (
+        contentType.startsWith('audio/') ||
+        ['application/vnd.apple.mpegurl', 'application/x-mpegURL'].includes(contentType) ||
+        ['.pcm', '.wav', '.mp3', '.aac', '.ogg', '.wma', '.m3u8', '.mpd'].some(a => d.url.includes(a))
+      ) {
+        push('audio', d);
+        if (type === 'media') {
           return;
         }
-
-        if (contentType.startsWith('image/')) {
-          push('image', d);
-        }
-        if (contentType.startsWith('audio/')) {
-          push('audio', d);
-          if (type === 'media') {
-            return;
-          }
-        }
-        if (contentType.startsWith('video/')) {
-          push('video', d);
-          if (type === 'media') {
-            return;
-          }
+      }
+      if (
+        contentType.startsWith('video/') ||
+        ['.flv', '.avi', '.wmv', '.mov', '.mp4', '.webm', '.mkv'].some(a => d.url.includes(a))
+      ) {
+        push('video', d);
+        if (type === 'media') {
+          return;
         }
       }
     }
@@ -118,7 +126,7 @@
         }
       });
 
-      app.emit('toolbar', {
+      toolbar.run({
         tabId: tab.id,
         images: 0,
         videos: 0,
@@ -128,11 +136,13 @@
   });
 
   const observe = {
-    install: () => chrome.storage.local.get({
-      image: false,
-      video: true,
-      audio: true
-    }, prefs => {
+    install: async () => {
+      const prefs = await chrome.storage.local.get({
+        image: false,
+        video: true,
+        audio: true
+      });
+
       observe.remove();
 
       let types = [];
@@ -148,19 +158,24 @@
       });
 
       if (types.length) {
-        // console.log(prefs, types);
         chrome.webRequest.onHeadersReceived.addListener(onHeadersReceived, {
           urls: ['*://*/*'],
           types
         }, ['responseHeaders']);
       }
-    }),
+    },
     remove: () => {
       chrome.webRequest.onHeadersReceived.removeListener(onHeadersReceived);
     }
   };
-  app.on('prefs.audio', observe.install);
-  app.on('prefs.video', observe.install);
-  app.on('prefs.image', observe.install);
+
+  chrome.storage.onChanged.addListener((ps, type) => {
+    if (type === 'session') {
+      return;
+    }
+    if (ps.image || ps.audio || ps.video) {
+      observe.install();
+    }
+  });
   observe.install();
 }

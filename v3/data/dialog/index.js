@@ -1,12 +1,9 @@
 /* global locale, filename, filesize */
 'use strict';
 
-const args = window.location.search.substr(1).split('&').reduce((p, c) => {
-  const [key, value] = c.split('=');
-  p[key] = decodeURIComponent(value);
-  return p;
-}, {});
-document.title = locale.get('dialogTitle') + ' "' + (args.title || '-') + '"';
+const args = new URLSearchParams(location.search);
+
+document.title = locale.get('dialogTitle') + ' "' + (args.get('title') || '-') + '"';
 
 if (/Edg/.test(navigator.userAgent)) {
   document.getElementById('remote').style.display = 'none';
@@ -26,8 +23,6 @@ const category = (() => {
 })();
 
 const add = (t => (d, key) => {
-  console.log(d, key);
-
   document.body.dataset[key] = true;
   const tbody = document.querySelector(`#list tbody[data-id="${key}"]`);
   const clone = document.importNode(t.content, true);
@@ -42,15 +37,15 @@ const add = (t => (d, key) => {
   tbody.appendChild(clone);
 })(document.querySelector('#list template'));
 
-if (args.url) {
+if (args.has('url') && args.get('url') !== '') {
   add({
-    url: args.url,
-    responseHeaders: JSON.parse(args.headers)
+    url: args.get('url'),
+    responseHeaders: JSON.parse(args.get('headers'))
   }, 'applications');
   document.dispatchEvent(new Event('change'));
 }
 else {
-  const tabId = Number(args.id);
+  const tabId = Number(args.get('id'));
 
   chrome.scripting.executeScript({
     target: {
@@ -77,9 +72,9 @@ else {
     }
   });
 }
-if (args.referrer) {
+if (args.has('referrer')) {
   add({
-    url: args.referrer
+    url: args.get('referrer')
   }, 'pages');
 }
 

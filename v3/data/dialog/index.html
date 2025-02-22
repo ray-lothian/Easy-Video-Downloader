@@ -1,151 +1,152 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title data-l10n-id="dialogTitle"></title>
-    <link rel="stylesheet" href="index.css">
-  </head>
-  <body vbox
-    data-pages=false
-    data-images=false
-    data-audios=false
-    data-videos=false
-    data-applications=false>
-    <div id="remote">
-      <span data-id="convert-to-mp3" title="Convert to MP3">Convert to MP3</span>
-      <span data-id="video-audio-muxer" title="Media Muxer">Media Muxer</span>
-      <span data-id="audio-joiner" title="Audio Joiner">Audio Joiner</span>
-      <span data-id="image-resizer" title="Image Resizer">Image Resizer</span>
-      <span data-id="pdf-reader" title="PDF Reader">PDF Reader</span>
-      <span data-id="zip-manager" title="ZIP Manager">ZIP Manager</span>
-      <span data-id="sqlite-reader" title="SQLite Reader">SQLite Reader</span>
-    </div>
-    <div id="list" flex="1">
-      <table>
-        <colgroup>
-          <col width="20">
-          <col width="30%">
-          <col width="20">
-          <col width="140px">
-          <col>
-        </colgroup>
-        <thead data-id="audios">
-          <tr>
-            <th colspan="3" data-l10n-id="dialogAudios"></th>
-            <td>
-              <a href="#" data-l10n-id="dialogSelectAll" data-cmd="select-all"></a>
-              <a href="#" data-l10n-id="dialogSelectNone" data-cmd="select-none"></a>
-            </td>
-          </tr>
-        </thead>
-        <tbody data-id="audios"></tbody>
-        <thead data-id="videos">
-          <tr>
-            <th colspan="3" data-l10n-id="dialogVideos"></th>
-            <td>
-              <a href="#" data-l10n-id="dialogSelectAll" data-cmd="select-all"></a>
-              <a href="#" data-l10n-id="dialogSelectNone" data-cmd="select-none"></a>
-            </td>
-          </tr>
-        </thead>
-        <tbody data-id="videos"></tbody>
-        <thead data-id="applications">
-          <tr>
-            <th colspan="3" data-l10n-id="dialogApplications"></th>
-            <td>
-              <a href="#" data-l10n-id="dialogSelectAll" data-cmd="select-all"></a>
-              <a href="#" data-l10n-id="dialogSelectNone" data-cmd="select-none"></a>
-            </td>
-          </tr>
-        </thead>
-        <tbody data-id="applications"></tbody>
-        <thead data-id="pages">
-          <tr>
-            <th colspan="3" data-l10n-id="dialogPages"></th>
-            <td>
-              <a href="#" data-l10n-id="dialogSelectAll" data-cmd="select-all"></a>
-              <a href="#" data-l10n-id="dialogSelectNone" data-cmd="select-none"></a>
-            </td>
-          </tr>
-        </thead>
-        <tbody data-id="pages"></tbody>
-        <thead data-id="images">
-          <tr>
-            <th colspan="3" data-l10n-id="dialogImages"></th>
-            <td>
-              <a href="#" data-l10n-id="dialogSelectAll" data-cmd="select-all"></a>
-              <a href="#" data-l10n-id="dialogSelectNone" data-cmd="select-none"></a>
-            </td>
-          </tr>
-        </thead>
-        <tbody data-id="images"></tbody>
-        <template>
-          <tr>
-            <td><input type="checkbox"></td>
-            <td><input type="text" data-id="name" placeholder="filename"></td>
-            <td data-id="category" data-cmd="category"><span></span></td>
-            <td data-id="size">--</td>
-            <td data-id="url">URL</td>
-          </tr>
-        </template>
-      </table>
-    </div>
-    <span data-l10n-id="dialogMSG"></span>
-    <fieldset>
-      <table>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title data-l10n-id="dialogTitle"></title>
+  <link rel="stylesheet" href="index.css">
+</head>
+<body vbox
+  data-pages=false
+  data-images=false
+  data-audios=false
+  data-videos=false
+  data-applications=false>
+  <div id="remote">
+    <span data-id="convert-to-mp3" title="Convert to MP3">Convert to MP3</span>
+    <span data-id="video-audio-muxer" title="Media Muxer">Media Muxer</span>
+    <span data-id="audio-joiner" title="Audio Joiner">Audio Joiner</span>
+    <span data-id="image-resizer" title="Image Resizer">Image Resizer</span>
+    <span data-id="pdf-reader" title="PDF Reader">PDF Reader</span>
+    <span data-id="zip-manager" title="ZIP Manager">ZIP Manager</span>
+    <span data-id="sqlite-reader" title="SQLite Reader">SQLite Reader</span>
+  </div>
+  <div id="list" flex="1">
+    <table>
+      <colgroup>
+        <col width="20">
+        <col width="30%">
+        <col width="20">
+        <col width="140px">
+        <col>
+      </colgroup>
+      <thead data-id="audios">
         <tr>
-          <td><span data-l10n-id="dialogDownloadWith"></span></td>
+          <th colspan="3" data-l10n-id="dialogAudios"></th>
           <td>
-            <select flex="1" id="downloader">
-              <option value="built-in" data-l10n-id="dialogBuiltIn"></option>
-              <option value="idm" data-l10n-id="dialogIDM"></option>
-              <option value="wget" data-l10n-id="dialogWget"></option>
-              <option value="tdm" data-l10n-id="dialogTDM"></option>
-            </select>
+            <a href="#" data-l10n-id="dialogSelectAll" data-cmd="select-all"></a>
+            <a href="#" data-l10n-id="dialogSelectNone" data-cmd="select-none"></a>
           </td>
         </tr>
+      </thead>
+      <tbody data-id="audios"></tbody>
+      <thead data-id="videos">
         <tr>
-          <td><span data-l10n-id="dialogCommand"></span></td>
+          <th colspan="3" data-l10n-id="dialogVideos"></th>
           <td>
-            <div hbox align="center">
-              <input type="text" flex="1" id=command>
-              &nbsp;
-              <label hbox align="center">
-                <input type="checkbox" id="quotes"><span data-l10n-id="dialogQuotes"></span>
-              </label>
-              &nbsp;
-              <input type="button" data-l10n-value="value" data-l10n-id="dialogSave" disabled="true" data-cmd="save">
-            </div>
+            <a href="#" data-l10n-id="dialogSelectAll" data-cmd="select-all"></a>
+            <a href="#" data-l10n-id="dialogSelectNone" data-cmd="select-none"></a>
           </td>
         </tr>
-      </table>
-    </fieldset>
-    <div vbox>
-      <span id="warning" data-visible=false data-l10n-id="dialogWarning"></span>
-      <div hbox id="tools" align="center">
-        <input type="text" id="pattern" value="name-[#=1].[ext]">
-        <input type="button" data-l10n-value="value" data-l10n-id="dialogRename" data-cmd="rename">
-        <span flex=1></span>
-        <input type="button" data-l10n-value="value" data-l10n-id="dialogSize" data-cmd="size">
-        <input type="button" data-l10n-value="value" data-l10n-id="dialogCopy" disabled="true" data-cmd="copy">
-        <input type="button" data-l10n-value="value" data-l10n-id="dialogTest" data-cmd="test" disabled="true">
-        <input type="button" data-l10n-value="value" data-l10n-id="dialogOK" disabled="true" data-cmd="download">
-      </div>
+      </thead>
+      <tbody data-id="videos"></tbody>
+      <thead data-id="applications">
+        <tr>
+          <th colspan="3" data-l10n-id="dialogApplications"></th>
+          <td>
+            <a href="#" data-l10n-id="dialogSelectAll" data-cmd="select-all"></a>
+            <a href="#" data-l10n-id="dialogSelectNone" data-cmd="select-none"></a>
+          </td>
+        </tr>
+      </thead>
+      <tbody data-id="applications"></tbody>
+      <thead data-id="pages">
+        <tr>
+          <th colspan="3" data-l10n-id="dialogPages"></th>
+          <td>
+            <a href="#" data-l10n-id="dialogSelectAll" data-cmd="select-all"></a>
+            <a href="#" data-l10n-id="dialogSelectNone" data-cmd="select-none"></a>
+          </td>
+        </tr>
+      </thead>
+      <tbody data-id="pages"></tbody>
+      <thead data-id="images">
+        <tr>
+          <th colspan="3" data-l10n-id="dialogImages"></th>
+          <td>
+            <a href="#" data-l10n-id="dialogSelectAll" data-cmd="select-all"></a>
+            <a href="#" data-l10n-id="dialogSelectNone" data-cmd="select-none"></a>
+          </td>
+        </tr>
+      </thead>
+      <tbody data-id="images"></tbody>
+      <template>
+        <tr>
+          <td><input type="checkbox"></td>
+          <td><input type="text" data-id="name" placeholder="filename"></td>
+          <td data-id="category" data-cmd="category"><span></span></td>
+          <td data-id="size">--</td>
+          <td data-id="url">URL</td>
+        </tr>
+      </template>
+    </table>
+  </div>
+  <span data-l10n-id="dialogMSG"></span>
+  <fieldset>
+    <table>
+      <tr>
+        <td><span data-l10n-id="dialogDownloadWith"></span></td>
+        <td>
+          <select flex="1" id="downloader">
+            <option value="built-in" data-l10n-id="dialogBuiltIn"></option>
+            <option value="idm" data-l10n-id="dialogIDM"></option>
+            <option value="wget" data-l10n-id="dialogWget"></option>
+            <option value="tdm" data-l10n-id="dialogTDM"></option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td><span data-l10n-id="dialogCommand"></span></td>
+        <td>
+          <div hbox align="center">
+            <input type="text" flex="1" id=command>
+            &nbsp;
+            <label hbox align="center">
+              <input type="checkbox" id="quotes"><span data-l10n-id="dialogQuotes"></span>
+            </label>
+            &nbsp;
+            <input type="button" data-l10n-value="value" data-l10n-id="dialogSave" disabled="true" data-cmd="save">
+          </div>
+        </td>
+      </tr>
+    </table>
+  </fieldset>
+  <div vbox>
+    <span id="warning" data-visible=false data-l10n-id="dialogWarning"></span>
+    <div hbox id="tools" align="center">
+      <input type="text" id="pattern" value="name-[#=1].[ext]">
+      <input type="button" data-l10n-value="value" data-l10n-id="dialogRename" data-cmd="rename">
+      <span flex=1></span>
+      <input type="button" data-l10n-value="value" data-l10n-id="dialogSize" data-cmd="size">
+      <input type="button" data-l10n-value="value" data-l10n-id="dialogCopy" disabled="true" data-cmd="copy">
+      <input type="button" data-l10n-value="value" data-l10n-id="dialogTest" data-cmd="test" disabled="true">
+      <input type="button" data-l10n-value="value" data-l10n-id="dialogOK" disabled="true" data-cmd="download">
     </div>
+  </div>
 
-    <div id="notify"></div>
-    <script src="/data/locale.js"></script>
-    <script src="command.js"></script>
-    <script src="filename.js"></script>
-    <script src="filesize.js"></script>
-    <script src="downloader/termlib_parser.js"></script>
-    <script src="downloader/common.js"></script>
-    <script src="downloader/built-in.js"></script>
-    <script src="downloader/idm.js"></script>
-    <script src="downloader/tdm.js"></script>
-    <script src="downloader/wget.js"></script>
-    <script src="prefs.js"></script>
-    <script src="persist.js"></script>
-    <script src="index.js"></script>
-  </body>
+  <div id="notify"></div>
+  <script src="/data/locale.js"></script>
+  <script src="command.js"></script>
+  <script src="filename.js"></script>
+  <script src="filesize.js"></script>
+  <script src="downloader/termlib_parser.js"></script>
+  <script src="downloader/common.js"></script>
+  <script src="downloader/built-in.js"></script>
+  <script src="downloader/idm.js"></script>
+  <script src="downloader/tdm.js"></script>
+  <script src="downloader/wget.js"></script>
+  <script src="prefs.js"></script>
+  <script src="persist.js"></script>
+  <script src="index.js"></script>
+</body>
 </html>

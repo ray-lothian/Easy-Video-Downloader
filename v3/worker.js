@@ -1,41 +1,33 @@
 'use strict';
 
-const app = {
-  callbacks: {}
-};
-app.on = (id, callback) => {
-  app.callbacks[id] = app.callbacks[id] || [];
-  app.callbacks[id].push(callback);
-};
-app.emit = (id, value) => (app.callbacks[id] || []).forEach(c => c(value));
+if (typeof importScripts !== 'undefined') {
+  self.importScripts('action.js');
+  self.importScripts('observe.js');
+}
 
-self.importScripts('action.js');
-self.importScripts('observe.js');
+const onCommand = async ({tab, download = '', responseHeaders = [], instance = false}) => {
+  const args = new URLSearchParams();
+  args.set('id', tab.id);
+  args.set('windowId', tab.windowId);
+  args.set('title', tab.title || '');
+  args.set('referrer', tab.url || '');
+  args.set('url', download);
+  args.set('headers', JSON.stringify(responseHeaders));
 
-chrome.storage.onChanged.addListener((ps, type) => {
-  if (type === 'session') {
-    return;
-  }
-  Object.keys(ps).forEach(k => {
-    app.emit('prefs.' + k, ps[k].newValue);
-  });
-});
+  const url = '/data/dialog/index.html?' + args.toString();
 
-app.on('command', ({tab, download = '', responseHeaders = [], instance = false}) => {
-  const url =
-    '/data/dialog/index.html?id=' + tab.id +
-    '&windowId=' + tab.windowId +
-    '&title=' + encodeURIComponent(tab.title || '') +
-    '&referrer=' + encodeURIComponent(tab.url || '') +
-    '&url=' + encodeURIComponent(download) +
-    '&headers=' + encodeURIComponent(JSON.stringify(responseHeaders));
-  async function create() {
+  const r = await chrome.runtime.sendMessage({
+    method: 'exists',
+    url
+  }).catch(() => '');
+
+  if (r !== true) {
     const win = await chrome.windows.getCurrent();
 
     const prefs = {
       'width': 650,
       'normal-height': 500,
-      'compact-height': 300,
+      'compact-height': 400,
       'left': (win.left || 0) + Math.round((win.width - 650) / 2)
     };
     prefs.height = instance ? prefs['compact-height'] : prefs['normal-height'];
@@ -49,16 +41,8 @@ app.on('command', ({tab, download = '', responseHeaders = [], instance = false})
       type: 'popup'
     });
   }
-  chrome.runtime.sendMessage({
-    method: 'exists',
-    url
-  }, r => {
-    chrome.runtime.lastError;
-    if (r !== true) {
-      create();
-    }
-  });
-});
+};
+chrome.action.onClicked.addListener(tab => onCommand({tab}));
 
 chrome.runtime.onMessage.addListener((request, sender) => {
   if (request.method === 'focus') {
@@ -76,8 +60,7 @@ chrome.runtime.onMessage.addListener((request, sender) => {
 {
   const {management, runtime: {onInstalled, setUninstallURL, getManifest}, storage, tabs} = chrome;
   if (navigator.webdriver !== true) {
-    const page = getManifest().homepage_url;
-    const {name, version} = getManifest();
+    const {homepage_url: page, name, version} = getManifest();
     onInstalled.addListener(({reason, previousVersion}) => {
       management.getSelf(({installType}) => installType === 'normal' && storage.local.get({
         'faqs': true,
@@ -86,7 +69,7 @@ chrome.runtime.onMessage.addListener((request, sender) => {
         if (reason === 'install' || (prefs.faqs && reason === 'update')) {
           const doUpdate = (Date.now() - prefs['last-update']) / 1000 / 60 / 60 / 24 > 45;
           if (doUpdate && previousVersion !== version) {
-            tabs.query({active: true, currentWindow: true}, tbs => tabs.create({
+            tabs.query({active: true, lastFocusedWindow: true}, tbs => tabs.create({
               url: page + '?version=' + version + (previousVersion ? '&p=' + previousVersion : '') + '&type=' + reason,
               active: reason === 'install',
               ...(tbs && tbs.length && {index: tbs[0].index + 1})

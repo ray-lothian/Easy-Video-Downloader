@@ -5,7 +5,7 @@ body {
   font-family: "Helvetica Neue", Helvetica, sans-serif;
   font-size: 13px;
   height: calc(100% - 20px);
-  margin: 0 10px 10px 10px;
+  margin: 0 10px 10px;
   background-color: #ececec;
 }
 select {
@@ -36,6 +36,10 @@ fieldset {
 a {
   text-decoration: none;
   margin-left: 5px;
+}
+a,
+a:visited {
+  color: #0075ff;
 }
 input[type=button] {
   margin: 0 1px;

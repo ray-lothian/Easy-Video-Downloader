@@ -5,7 +5,7 @@ const downloads = {
   id: 'com.add0n.node'
 };
 
-downloads.cookies = (url = args.referrer) => {
+downloads.cookies = (url = args.get('referrer')) => {
   if (!url || !chrome.cookies) {
     return Promise.resolve('');
   }
@@ -26,7 +26,7 @@ downloads.parse = (str, {url, filename}, quotes = false) => {
       .replace(/\[HASH\]/g, url.hash)
       .replace(/\[PROTOCOL\]/g, url.protocol)
       .replace(/\[FILENAME\]/g, filename)
-      .replace(/\[REFERRER\]/g, args.referrer)
+      .replace(/\[REFERRER\]/g, args.get('referrer'))
       .replace(/\[USERAGENT\]/g, navigator.userAgent)
       .replace(/\[PROMPT\]/g, () => window.prompt('User input'))
       .replace(/\\/g, '\\\\')
@@ -67,8 +67,8 @@ downloads.guide = () => {
   const opt = {
     url: '/data/helper/index.html'
   };
-  if (args.windowId) {
-    opt.windowId = Number(args.windowId);
+  if (args.has('windowId')) {
+    opt.windowId = Number(args.get('windowId'));
   }
   chrome.tabs.create(opt);
 };

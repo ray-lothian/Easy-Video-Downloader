@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "version": "0.2.0",
+  "version": "0.2.1",
   "name": "__MSG_appTitle__",
   "description": "__MSG_appDescription__",
   "default_locale": "en",
@@ -19,20 +19,27 @@
     "cookies"
   ],
   "icons": {
-    "16": "data/icons/16.png",
-    "32": "data/icons/32.png",
-    "48": "data/icons/48.png",
-    "64": "data/icons/64.png",
-    "128": "data/icons/128.png",
-    "256": "data/icons/256.png",
-    "512": "data/icons/512.png"
+    "16": "/data/icons/16.png",
+    "32": "/data/icons/32.png",
+    "48": "/data/icons/48.png",
+    "64": "/data/icons/64.png",
+    "128": "/data/icons/128.png",
+    "256": "/data/icons/256.png",
+    "512": "/data/icons/512.png"
   },
   "background": {
-    "service_worker": "worker.js"
+    "service_worker": "worker.js",
+    "scripts": ["action.js", "observe.js", "worker.js"]
   },
   "action": {},
   "homepage_url": "https://webextension.org/listing/easy-video-downloader.html",
   "options_ui": {
-    "page": "data/options/index.html"
+    "page": "/data/options/index.html"
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "{cd04e15e-6b23-4648-860d-0057602a5c2a}",
+      "strict_min_version": "128.0"
+    }
   }
 }
